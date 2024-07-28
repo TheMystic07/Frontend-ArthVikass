@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import  {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function Register() {
   const [aadhar, setAadhar] = useState("");
@@ -78,20 +78,22 @@ export function Register() {
       return;
     }
 
-    const resU = await fetch("/api/userExists", { 
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    }); 
-    const data = await resU.json();
-    if (data.user.exists) {
-      setError("User with this email already exists.");
-      return;
-    }
-
     try {
+      const resU = await fetch("/api/userExists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const userExistsData = await resU.json();
+
+      if (userExistsData?.user?.exists) {
+        setError("User with this email already exists.");
+        return;
+      }
+
       const response = await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -118,13 +120,12 @@ export function Register() {
         throw new Error(`Error: ${errorData.message || response.statusText}`);
       }
 
-      const data = await response.json();
-      console.log("Registration successful:", data);
+      const registerData = await response.json();
+      console.log("Registration successful:", registerData);
       const forme = e.target;
       forme.reset();
       router.push("/login");
       setError(null);
-
     } catch (error) {
       console.error("Registration failed:", error);
       setError("Registration failed. Please try again.");

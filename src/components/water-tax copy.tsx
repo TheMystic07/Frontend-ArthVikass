@@ -56,7 +56,7 @@ export function GarbageTax() {
         </div>
       </CardContent>
       <CardFooter>
-        <PayButton />
+        <PayButton catagory={"garbage"} amount={total} />
       </CardFooter>
     </Card>
   </div>
