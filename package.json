@@ -9,17 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^0.0.30",
+    "@ai-sdk/openai": "^0.0.40",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@tabler/icons-react": "^3.11.0",
+    "ai": "^3.2.37",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.18",
     "lucide-react": "^0.416.0",
+    "marked": "^13.0.2",
     "mongoose": "^8.5.1",
     "next": "14.2.5",
-    "react": "^18",
+    "next-auth": "^4.24.7",
+    "next-themes": "^0.3.0",
+    "react": "^18.3.1",
     "react-dom": "^18",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

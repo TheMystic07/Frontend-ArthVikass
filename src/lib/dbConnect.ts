@@ -6,14 +6,14 @@ interface connectionObject {
 
 const connection: connectionObject = {};
 
-export default async function dbConnect(): Promise<void> {
+export  async function dbConnect(): Promise<void> {
     if (connection.isConnected) {
         console.log("DB Already Connected");
         return
     }
 
     try {
-        const db = await mongoose.connect(process.env.MONGO_URI! || '');
+        const db = await mongoose.connect(process.env.MONGODB_URI! || '');
         connection.isConnected = db.connections[0].readyState;
         console.log("DB connected successfully");
     } catch (error) {
