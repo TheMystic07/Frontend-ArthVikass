@@ -14,3 +14,15 @@ export async function POST(req) {
         return NextResponse.json({ message: 'Payment Failed' }, { status: 500 });
     }
 }
+
+
+export async function GET(req) {
+    try {
+        await dbConnect();
+        const payments = await Payment.find();
+        return NextResponse.json(payments, { status: 200 });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: 'Payment Failed' }, { status: 500 });
+    }
+}
