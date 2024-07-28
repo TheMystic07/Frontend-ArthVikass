@@ -1,14 +1,14 @@
 //@ts-nocheck
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
-export function Register() {
+export default function Register() {
   const [aadhar, setAadhar] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -260,11 +260,9 @@ export function Register() {
           {location && (
             <div className="space-y-2">
               <Label>Location</Label>
-              <Input
-                type="text"
-                value={`Latitude: ${location.latitude}, Longitude: ${location.longitude}`}
-                readOnly
-              />
+              <div className="flex gap-4">
+                <Input type="text" value={`Latitude: ${location.latitude}, Longitude: ${location.longitude}`} readOnly />
+              </div>
             </div>
           )}
           <div className="space-y-2">
@@ -272,23 +270,22 @@ export function Register() {
             <Input
               id="password"
               type="password"
-              placeholder="Password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <div className="flex justify-end">
-            <Button type="submit" disabled={!formSubmitEnabled}>
-              Register
-            </Button>
-          </div>
+          <Button onClick={handleGetLocation} className="w-full">
+            Get Real-Time Location
+          </Button>
         </CardContent>
-        {error && (
-          <CardFooter>
-            <p className="text-red-500">{error}</p>
-          </CardFooter>
-        )}
+        <CardFooter className="flex flex-col items-center">
+          <Button type="submit" className="w-full" disabled={!formSubmitEnabled}>
+            Register
+          </Button>
+          {error && <p className="text-red-600 mt-4">{error}</p>}
+        </CardFooter>
       </Card>
     </form>
   );
